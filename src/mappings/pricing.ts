@@ -2,7 +2,7 @@
 import { Pair, Token, Bundle } from '../types/schema'
 import { BigDecimal, Address, BigInt } from '@graphprotocol/graph-ts/index'
 import { ZERO_BD, factoryContract, ADDRESS_ZERO, ONE_BD } from './helpers'
-import got from 'got'
+import axios from 'axios'
 
 const WETH_ADDRESS = '0x1fa6a37c64804c0d797ba6bc1955e50068fbf362'
 // TODO - xocel
@@ -22,13 +22,17 @@ const PRICE_URL = "https://api.coingecko.com/api/v3/simple/price?ids=ubiq&vs_cur
 
 // dummy for testing
 export function getEthPriceInUSD(): BigDecimal {
-  const response = got(PRICE_URL)
-  const data = response.json()
-  if (data && data.ubiq && data.ubiq.usd) {
-    return new BigDecimal(data.ubiq.usd)
-  } else {
-    return ZERO_BD
-  }
+  axios({
+    url: PRICE_URL,
+    method: 'get'
+  }).then(response => {
+    const data = response.data
+    if (data && data.ubiq && data.ubiq.usd) {
+      return new BigDecimal(data.ubiq.usd)
+    } else {
+      return ZERO_BD
+    }
+  })
 }
 
 // token where amounts should contribute to tracked volume and liquidity

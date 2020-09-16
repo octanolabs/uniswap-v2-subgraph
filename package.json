@@ -23,6 +23,6 @@
     "typescript": "^3.5.2"
   },
   "dependencies": {
-    "got": "^11.6.2"
+    "axios": "^0.20.0"
   }
 }
