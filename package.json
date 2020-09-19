@@ -6,11 +6,11 @@
   "scripts": {
     "codegen": "graph codegen --output-dir src/types/",
     "build": "graph build",
-    "create-local": "graph create octanolabs/shinobi --node http://127.0.0.1:8020",
-    "deploy-local": "graph deploy octanolabs/shinobi --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
-    "deploy": "graph deploy octanolabs/shinobi --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
+    "create-local": "graph create octanolabs/shinobitest --node http://127.0.0.1:8020",
+    "deploy-local": "graph deploy octanolabs/shinobitest --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
+    "deploy": "graph deploy octanolabs/shinobitest --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
     "deploy-staging": "graph deploy $THE_GRAPH_GITHUB_USER/$THE_GRAPH_SUBGRAPH_NAME /Uniswap --ipfs https://api.staging.thegraph.com/ipfs/ --node https://api.staging.thegraph.com/deploy/",
-    "watch-local": "graph deploy octanolabs/shinobi --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
+    "watch-local": "graph deploy octanolabs/shinobitest --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.16.0",
@@ -22,7 +22,5 @@
     "prettier": "^1.18.2",
     "typescript": "^3.5.2"
   },
-  "dependencies": {
-    "axios": "^0.20.0"
-  }
+  "dependencies": {}
 }
