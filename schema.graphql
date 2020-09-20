@@ -87,6 +87,13 @@ type Pair @entity {
   liquidityProviderCount: BigInt! # used to detect new exchanges
 }
 
+type Oracle @entity {
+  id: ID!
+  block: BigInt!
+  usd: BigDecimal!
+  getData: [BigInt!]!
+}
+
 type User @entity {
   id: ID!
   liquidityPositions: [LiquidityPosition!] @derivedFrom(field: "user")
