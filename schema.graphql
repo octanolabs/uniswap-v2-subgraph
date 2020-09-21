@@ -91,7 +91,7 @@ type Oracle @entity {
   id: ID!
   block: BigInt!
   usd: BigDecimal!
-  getData: [BigInt!]!
+  getPriceUsd: BigInt!
 }
 
 type User @entity {

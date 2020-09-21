@@ -35,9 +35,9 @@ dataSources:
     name: Oracle
     network: mainnet
     source:
-      address: '0x96Db5D68b8d40C4C3D1d5d3e366D40152C1E23A2'
+      address: '0xaefF2F7644f1C615aDb309513c4CB564F44Bb68F '
       abi: Oracle
-      startBlock: 1321197
+      startBlock: 1322544
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
