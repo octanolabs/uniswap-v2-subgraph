@@ -35,7 +35,7 @@ dataSources:
     name: Oracle
     network: mainnet
     source:
-      address: '0xaefF2F7644f1C615aDb309513c4CB564F44Bb68F '
+      address: '0xaefF2F7644f1C615aDb309513c4CB564F44Bb68F'
       abi: Oracle
       startBlock: 1322544
     mapping:

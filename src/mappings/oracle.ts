@@ -1,11 +1,11 @@
 /* eslint-disable prefer-const */
 import { Oracle } from '../types/schema'
 import { EthereumBlock, json, JSONValueKind } from '@graphprotocol/graph-ts'
-import { BigDecimal, BigInt, Boolean } from '@graphprotocol/graph-ts/index'
+import { BigDecimal, BigInt } from '@graphprotocol/graph-ts/index'
 import { exponentToBigDecimal } from './helpers'
 import { ZERO_BD } from './helpers'
 
-const XORACLE_ADDRESS = '0xaeff2f7644f1c615adb309513c4cb564f44bb68f' // created block 1322544
+const XORACLE_ADDRESS = '0xaefF2F7644f1C615aDb309513c4CB564F44Bb68F' // created block 1322544
 
 // dummy for testing
 export function getEthPriceInUSD(): BigDecimal {
@@ -13,7 +13,7 @@ export function getEthPriceInUSD(): BigDecimal {
   let oracle = Oracle.load(XORACLE_ADDRESS)
 
   if (oracle !== null) {
-    let data: BigInt = oracle.getPrice
+    let data: BigInt = oracle.getPriceUsd
     if (data !== null) {
       let usd = data.toBigDecimal()
       if (usd !== null) {
