@@ -1,6 +1,7 @@
 /* eslint-disable prefer-const */
-import { Oracle } from '../types/schema'
-import { EthereumBlock, json, JSONValueKind } from '@graphprotocol/graph-ts'
+import { PriceStore } from '../types/schema'
+import { Oracle } from '../types/Oracle/Oracle'
+import { Address, EthereumBlock, json, JSONValueKind } from '@graphprotocol/graph-ts'
 import { BigDecimal, BigInt } from '@graphprotocol/graph-ts/index'
 import { exponentToBigDecimal } from './helpers'
 import { ZERO_BD } from './helpers'
@@ -10,7 +11,7 @@ const XORACLE_ADDRESS = '0xaefF2F7644f1C615aDb309513c4CB564F44Bb68F' // created 
 // dummy for testing
 export function getEthPriceInUSD(): BigDecimal {
   // fetch price from market oracle
-  let oracle = Oracle.load(XORACLE_ADDRESS)
+  let oracle = PriceStore.load(XORACLE_ADDRESS)
   if (oracle !== null) {
     return oracle.usd
   } else {
@@ -18,12 +19,16 @@ export function getEthPriceInUSD(): BigDecimal {
   }
 }
 
-export function handlePriceUpdate(event: PriceUpdated): void {
-  let oracle = Oracle.load(XORACLE_ADDRESS)
+export function priceUpdate(block: EthereumBlock): void {
+  let contract = Oracle.bind(Address.fromString(XORACLE_ADDRESS))
+  let oracle = PriceStore.load(XORACLE_ADDRESS)
   if (oracle == null) {
-    oracle = new Oracle(XORACLE_ADDRESS)
+    oracle = new PriceStore(XORACLE_ADDRESS)
+    oracle.usd = ZERO_BD
+    oracle.save()
+  } else {
+    let data: BigInt = contract.getPriceUsd()
+    oracle.usd = data.toBigDecimal().div(exponentToBigDecimal(BigInt.fromI32(6)))
+    oracle.save()
   }
-  let data: BigInt = event.params.usd
-  oracle.usd = data.toBigDecimal().div(exponentToBigDecimal(BigInt.fromI32(6)))
-  oracle.save()
 }

@@ -87,7 +87,7 @@ type Pair @entity {
   liquidityProviderCount: BigInt! # used to detect new exchanges
 }
 
-type Oracle @entity {
+type PriceStore @entity {
   # XORACLE_ADDRESS
   id: ID!
   # mirrored from contract

@@ -42,15 +42,16 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.3
       language: wasm/assemblyscript
-      file: ./src/mappings/core.ts
+      file: ./src/mappings/oracle.ts
       entities:
-        - Oracle
+        - PriceStore
       abis:
         - name: Oracle
           file: ./abis/oracle.json
-      eventHandlers:
-        - event: PriceUpdated(uint256,uint256,uint256)
-          handler: handlePriceUpdate
+      blockHandlers:
+        - handler: priceUpdate
+          filter:
+            kind: call
 templates:
   - kind: ethereum/contract
     name: Pair

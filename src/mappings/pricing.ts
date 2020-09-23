@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import { Oracle, Pair, Token, Bundle } from '../types/schema'
+import { Pair, Token, Bundle } from '../types/schema'
 import { BigDecimal, Address, BigInt } from '@graphprotocol/graph-ts/index'
 import { ZERO_BD, factoryContract, ADDRESS_ZERO, ONE_BD } from './helpers'
 import { getEthPriceInUSD } from './oracle'
