@@ -13,7 +13,7 @@ export function getEthPriceInUSD(): BigDecimal {
   // fetch price from market oracle
   let oracle = PriceStore.load(XORACLE_ADDRESS)
   if (oracle == null) {
-    return BigDecimal.fromString('0.2') // ZERO_BD
+    return ZERO_BD
   } else {
     return oracle.usd
   }
@@ -23,15 +23,15 @@ export function priceUpdate(block: EthereumBlock): void {
   let oracle = PriceStore.load(XORACLE_ADDRESS)
   if (oracle == null) {
     oracle = new PriceStore(XORACLE_ADDRESS)
-    oracle.usd =  BigDecimal.fromString('0.2') // ZERO_BD
+    oracle.usd =  ZERO_BD
   } else {
     let contract = Oracle.bind(Address.fromString(XORACLE_ADDRESS))
     if (contract == null) {
-      oracle.usd =  BigDecimal.fromString('0.2') // ZERO_BD
+      oracle.usd =  ZERO_BD
     } else {
       let data: BigInt = contract.getPriceUsd()
       if (data == null) {
-        oracle.usd =  BigDecimal.fromString('0.2') // ZERO_BD
+        oracle.usd =  ZERO_BD
       } else {
         oracle.usd = data.toBigDecimal().div(exponentToBigDecimal(BigInt.fromI32(6)))
       }
