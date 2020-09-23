@@ -50,8 +50,6 @@ dataSources:
           file: ./abis/oracle.json
       blockHandlers:
         - handler: priceUpdate
-          filter:
-            kind: call
 templates:
   - kind: ethereum/contract
     name: Pair

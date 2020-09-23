@@ -90,10 +90,11 @@ type Pair @entity {
 type PriceStore @entity {
   # XORACLE_ADDRESS
   id: ID!
+
   # mirrored from contract
-  getPriceUsd: BigInt!
-  getTimestamp: BigInt!
-  getPriceBtc: BigInt!
+  getPriceUsd: BigInt
+  getTimestamp: BigInt
+  getPriceBtc: BigInt
 
   #calculated
   usd: BigDecimal!
