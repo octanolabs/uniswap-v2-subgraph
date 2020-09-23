@@ -36,22 +36,21 @@ dataSources:
     network: mainnet
     source:
       address: '0xaefF2F7644f1C615aDb309513c4CB564F44Bb68F'
-      abi: Oracle
       startBlock: 1322544
+      abi: Oracle
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
       language: wasm/assemblyscript
-      file: ./src/mappings/oracle.ts
+      file: ./src/mappings/core.ts
       entities:
         - Oracle
       abis:
         - name: Oracle
           file: ./abis/oracle.json
-      blockHandlers:
-        - handler: handleBlock
-          filter:
-            kind: call
+      eventHandlers:
+        - event: PriceUpdated(uint256,uint256,uint256)
+          handler: handlePriceUpdate
 templates:
   - kind: ethereum/contract
     name: Pair

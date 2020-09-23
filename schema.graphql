@@ -88,10 +88,15 @@ type Pair @entity {
 }
 
 type Oracle @entity {
+  # XORACLE_ADDRESS
   id: ID!
-  block: BigInt!
-  usd: BigDecimal!
+  # mirrored from contract
   getPriceUsd: BigInt!
+  getTimestamp: BigInt!
+  getPriceBtc: BigInt!
+
+  #calculated
+  usd: BigDecimal!
 }
 
 type User @entity {
