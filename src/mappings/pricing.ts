@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import { Pair, Token, Bundle } from '../types/schema'
+import { Pair, Token } from '../types/schema'
 import { BigDecimal, Address, BigInt } from '@graphprotocol/graph-ts/index'
 import { ZERO_BD, factoryContract, ADDRESS_ZERO, ONE_BD } from './helpers'
 import { getEthPriceInUSD } from './oracle'
@@ -8,7 +8,7 @@ const WETH_ADDRESS = '0x1fa6a37c64804c0d797ba6bc1955e50068fbf362'
 
 // token where amounts should contribute to tracked volume and liquidity
 let WHITELIST: string[] = [
-  '0x1fa6a37c64804c0d797ba6bc1955e50068fbf362', // WETH
+  '0x1fa6a37c64804c0d797ba6bc1955e50068fbf362', // WUBQ
   '0xcf3222b7fda7a7563b9e1e6c966bead04ac23c36', // ESCH
   '0x500684ce0d4f04abedff3e54fcf8acc5e6cfc4bd', // GEO
   '0x20e3dd746ddf519b23ffbbb6da7a5d33ea6349d6' // SPHR
@@ -18,7 +18,7 @@ let WHITELIST: string[] = [
 let MINIMUM_USD_THRESHOLD_NEW_PAIRS = BigDecimal.fromString('1000')
 
 // minimum liquidity for price to get tracked
-let MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('100')
+let MINIMUM_LIQUIDITY_THRESHOLD_ETH = BigDecimal.fromString('2')
 
 /**
  * Search through graph to find derived Eth per token.
@@ -59,9 +59,10 @@ export function getTrackedVolumeUSD(
   token1: Token,
   pair: Pair
 ): BigDecimal {
-  let bundle = Bundle.load('1')
-  let price0 = token0.derivedETH.times(bundle.ethPrice)
-  let price1 = token1.derivedETH.times(bundle.ethPrice)
+  // let bundle = Bundle.load('1')
+  let ethPrice = getEthPriceInUSD()
+  let price0 = token0.derivedETH.times(ethPrice)
+  let price1 = token1.derivedETH.times(ethPrice)
 
   // if less than 5 LPs, require high minimum reserve amount amount or return 0
   if (pair.liquidityProviderCount.lt(BigInt.fromI32(5))) {
@@ -118,9 +119,10 @@ export function getTrackedLiquidityUSD(
   tokenAmount1: BigDecimal,
   token1: Token
 ): BigDecimal {
-  let bundle = Bundle.load('1')
-  let price0 = token0.derivedETH.times(bundle.ethPrice)
-  let price1 = token1.derivedETH.times(bundle.ethPrice)
+  // let bundle = Bundle.load('1')
+  let ethPrice = getEthPriceInUSD()
+  let price0 = token0.derivedETH.times(ethPrice)
+  let price1 = token1.derivedETH.times(ethPrice)
 
   // both are whitelist tokens, take average of both amounts
   if (WHITELIST.includes(token0.id) && WHITELIST.includes(token1.id)) {
