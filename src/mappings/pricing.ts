@@ -8,7 +8,10 @@ const WETH_ADDRESS = '0x1fa6a37c64804c0d797ba6bc1955e50068fbf362'
 
 // token where amounts should contribute to tracked volume and liquidity
 let WHITELIST: string[] = [
-  '0x1fa6a37c64804c0d797ba6bc1955e50068fbf362' // WETH
+  '0x1fa6a37c64804c0d797ba6bc1955e50068fbf362', // WETH
+  '0xcf3222b7fda7a7563b9e1e6c966bead04ac23c36', // ESCH
+  '0x500684ce0d4f04abedff3e54fcf8acc5e6cfc4bd', // GEO
+  '0x20e3dd746ddf519b23ffbbb6da7a5d33ea6349d6' // SPHR
 ]
 
 // minimum liquidity required to count towards tracked volume for pairs with small # of Lps
